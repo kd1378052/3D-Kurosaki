@@ -3,7 +3,10 @@
 //#include "Scene/TitleScene/TitleScene.h"
 //ヘッダー内でインクルードを禁止
 
+//前方宣言
 class TitleScene;
+class GameScene;
+
 
 //============================================================
 // アプリケーションクラス
@@ -57,7 +60,13 @@ private:
 	bool		m_endFlag = false;
 
 	//おためし１
-	TitleScene *m_titleScene;
+	//TitleScene *m_titleScene;	//生ポインタ
+	//ポイント変数は　アドレス　が入る
+	//変数は　値が　入る
+
+	//スマートポインタ 
+	std::shared_ptr<TitleScene> m_titleScene;
+	std::shared_ptr<GameScene> m_gameScene;
 
 //=====================================================
 // シングルトンパターン

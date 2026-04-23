@@ -70,6 +70,9 @@
     <Filter Include="Src\Application\Scene\TitleScene">
       <UniqueIdentifier>{f293bfc1-f7df-4e92-8cf8-7bdba7b57613}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Scene\GameScene">
+      <UniqueIdentifier>{cfbc4b0a-40f5-4c4a-ab70-055c43e03b14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -237,6 +240,9 @@
     <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h">
       <Filter>Src\Application\Scene\TitleScene</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h">
+      <Filter>Src\Application\Scene\GameScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -373,6 +379,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp">
       <Filter>Src\Application\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp">
+      <Filter>Src\Application\Scene\GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
