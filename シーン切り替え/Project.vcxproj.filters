@@ -73,6 +73,9 @@
     <Filter Include="Src\Application\Scene\GameScene">
       <UniqueIdentifier>{cfbc4b0a-40f5-4c4a-ab70-055c43e03b14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Scene\BaseScene">
+      <UniqueIdentifier>{53f35a72-82bd-4335-9483-363f643488a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -89,9 +92,6 @@
     </ClInclude>
     <ClInclude Include="..\Library\tinygltf\tiny_gltf.h">
       <Filter>Library\tinygltf</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\main.h">
-      <Filter>Src\Application</Filter>
     </ClInclude>
     <ClInclude Include="src\Framework\Direct3D\KdDirect3D.h">
       <Filter>Src\Framework\Direct3D</Filter>
@@ -237,19 +237,22 @@
     <ClInclude Include="Src\Framework\Utility\KdDebug\KdDebugWireFrame.h">
       <Filter>Src\Framework\Utility\KdDebug</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h">
-      <Filter>Src\Application\Scene\TitleScene</Filter>
+    <ClInclude Include="Src\Application\Scene\BaseScene\BaseScene.h">
+      <Filter>Src\Application\Scene\BaseScene</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h">
       <Filter>Src\Application\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h">
+      <Filter>Src\Application\Scene\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\main.h">
+      <Filter>Src\Application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
       <Filter>Src</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\main.cpp">
-      <Filter>Src\Application</Filter>
     </ClCompile>
     <ClCompile Include="src\Framework\Direct3D\KdDirect3D.cpp">
       <Filter>Src\Framework\Direct3D</Filter>
@@ -377,11 +380,17 @@
     <ClCompile Include="Src\Framework\Utility\KdDebug\KdDebugWireFrame.cpp">
       <Filter>Src\Framework\Utility\KdDebug</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp">
-      <Filter>Src\Application\Scene\TitleScene</Filter>
+    <ClCompile Include="Src\Application\Scene\BaseScene\BaseScene.cpp">
+      <Filter>Src\Application\Scene\BaseScene</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp">
       <Filter>Src\Application\Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp">
+      <Filter>Src\Application\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\main.cpp">
+      <Filter>Src\Application</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

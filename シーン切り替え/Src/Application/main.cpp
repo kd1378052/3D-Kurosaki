@@ -2,6 +2,7 @@
 //ヘッダーファイルは必要なcppでインクルードする
 #include "Scene/TitleScene/TitleScene.h"
 #include"Scene/GameScene/GameScene.h"
+//BaseSceneはいらない　TitleSceneなどでインクルードしているから
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 // エントリーポイント
@@ -68,9 +69,9 @@ void Application::PreUpdate()
 void Application::Update()
 {
 
-	m_titleScene->Update();
-	m_gameScene->Update();
-//	TitleScene.Update();
+	//親のポインタで子クラスを操作することを
+	// ★ポリモーフィズム★　と呼ぶ
+	m_nowScene->Update();
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -178,7 +179,7 @@ void Application::DrawSprite()
 		// 座標と拡縮は行列不要!!!
 		//おためし3														座標
 		//m_titleScene->DrawSprite();
-		m_gameScene->DrawSprite();
+		m_nowScene->DrawSprite();
 	}
 	KdShaderManager::Instance().m_spriteShader.End();
 }
@@ -262,11 +263,15 @@ bool Application::Init(int w, int h)
 
 	//おためし2
 	//m_titleScene = new TitleScene();    // ①インスタンス確保
-	m_titleScene = std::make_shared<TitleScene>();
-	m_gameScene = std::make_shared<GameScene>();
+	//m_titleScene = std::make_shared<TitleScene>();
+	
+	//親クラスのポインタに子クラスの領域のアドレスを代入
+	m_nowScene = std::make_shared<TitleScene>();
+	//↑これを★アップキャスト★
 	//↑これをしないと空っぽ
-	m_titleScene->Init();                     // ②初期化
-	m_gameScene->Init();                     // ②初期化
+	//m_titleScene->Init();                     // ②初期化
+	
+	m_nowScene->Init();
 	return true;
 }
 
