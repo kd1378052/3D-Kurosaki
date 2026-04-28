@@ -5,7 +5,7 @@
 class GameScene : public BaseScene
 {
 public:
-	GameScene() {}
+	GameScene() { Init(); }
 	~GameScene() {}
 
 	void Init()			override;

@@ -1,7 +1,6 @@
 ﻿#include "main.h"
 //ヘッダーファイルは必要なcppでインクルードする
-#include "Scene/TitleScene/TitleScene.h"
-#include"Scene/GameScene/GameScene.h"
+#include "Scene/SceneManager.h"
 //BaseSceneはいらない　TitleSceneなどでインクルードしているから
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -61,6 +60,7 @@ void Application::KdPostUpdate()
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 void Application::PreUpdate()
 {
+	SceneManager::Instance().PreUpdate();
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -68,10 +68,7 @@ void Application::PreUpdate()
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 void Application::Update()
 {
-
-	//親のポインタで子クラスを操作することを
-	// ★ポリモーフィズム★　と呼ぶ
-	m_nowScene->Update();
+	SceneManager::Instance().Update();
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -175,11 +172,7 @@ void Application::DrawSprite()
 	// 2Dの描画はこの間で行う
 	KdShaderManager::Instance().m_spriteShader.Begin();
 	{
-		//２Dの描画はこの間で行う
-		// 座標と拡縮は行列不要!!!
-		//おためし3														座標
-		//m_titleScene->DrawSprite();
-		m_nowScene->DrawSprite();
+		SceneManager::Instance().Draw();
 	}
 	KdShaderManager::Instance().m_spriteShader.End();
 }
@@ -266,12 +259,14 @@ bool Application::Init(int w, int h)
 	//m_titleScene = std::make_shared<TitleScene>();
 	
 	//親クラスのポインタに子クラスの領域のアドレスを代入
-	m_nowScene = std::make_shared<TitleScene>();
+	//m_nowScene = std::make_shared<TitleScene>();
 	//↑これを★アップキャスト★
 	//↑これをしないと空っぽ
 	//m_titleScene->Init();                     // ②初期化
 	
-	m_nowScene->Init();
+	//黒崎教はコンストラクタでInit関数を呼ぶので
+	//Init関数を呼ぶ必要がない
+	//m_nowScene->Init();
 	return true;
 }
 

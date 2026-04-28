@@ -6,7 +6,7 @@
 class TitleScene : public BaseScene
 {
 public:
-	TitleScene() {}
+	TitleScene() { Init(); }
 	~TitleScene() {}
 
 	//override　必須　上書きする関数
