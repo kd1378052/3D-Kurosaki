@@ -4,8 +4,8 @@
 
 void TitleScene::Init()
 {
-	m_tex.Load("Asset/Textures/title.png");
-	m_starttex.Load("Asset/Textures/start.png");
+	m_tex.Load("Asset/Textures/TitleScene/title.png");
+	m_starttex.Load("Asset/Textures/TitleScene/start.png");
 	
 	m_alphaAdd = -0.01f;
 	m_alpha = 1;
