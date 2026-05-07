@@ -1,3 +1,4 @@
+黒崎先生メモ
 
 ＊調べる単語＊
 ポリモーフィズム
@@ -16,3 +17,5 @@ m_nowScene->Update();
 //おためし3	座標
 //m_titleScene->DrawSprite();
 m_nowScene->DrawSprite();
+
+配列はintしかはいらない
