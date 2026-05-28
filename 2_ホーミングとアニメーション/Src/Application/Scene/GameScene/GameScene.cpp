@@ -42,6 +42,7 @@ void GameScene::Update()
 void GameScene::DrawSprite()
 {
 	//プレイヤー
+	//↓アニメーション用の配列　0～5までの値を順番に入れる
 	int boostAnime[6] = { 0,64,128,192,128,64 };
 	Math::Rectangle rcPlayer = { boostAnime[(int)m_anime],0,64,64};
 	KdShaderManager::Instance().m_spriteShader.DrawTex

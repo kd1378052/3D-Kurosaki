@@ -2,6 +2,7 @@
 #include"../SceneManager.h"
 #include "../../Object/Ground/Ground.h"
 #include "../../Object/Player/Player.h"
+#include"../../Object/Back/Back.h"
 
 void GameScene::Event()
 {
@@ -38,6 +39,11 @@ void GameScene::Init()
 	//4オブジェクトリストに追加
 	m_objList.push_back(ground);
 	//AddObject(ground);	↑こっちを使うと処理不可軽減
+
+	//背景を追加
+	std::shared_ptr< Back> back;
+	back = std::make_shared< Back>();
+	m_objList.push_back(back);
 
 	//Playerを追加　表示
 	//std::shared_ptr< Player> player;

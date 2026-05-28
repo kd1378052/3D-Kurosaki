@@ -14,14 +14,18 @@ void Player::Init()
 
 	//画像分割
 	m_polygon->SetSplit(6,6);
+
+	//原点変更 プレイヤーの足元にする
+	m_polygon->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
+
+	m_pos = { -20,2,0 };
+	
 }
 
 void Player::Update()
 {
-	//Math::Vector3 camPos = { 0,10,-40 };
-	//Math::Matrix transMat = Math::Matrix::CreateTranslation(camPos);
-	//m_polygon->SetCameraMatrix(transMat);
-
+	
+	//アニメーションを番号を振り付けて格納している
 	int Run[4] = { 24,25,24,26 };
 	//アニメーション
 	m_polygon->SetUVRect(Run[(int)m_anime]);
@@ -41,14 +45,16 @@ void Player::Update()
 	{
 		m_pos.x -= 0.05f;
 	}
+	//ジャンプ処理
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 	{
-		m_pos.y += 0.05f;
+		//ジャンプ力
+		m_gravity = -0.1f;
 	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-	{
-		m_pos.y -= 0.05f;
-	}
+	m_pos.y -= m_gravity;
+
+	m_gravity += 0.005f;//重力の加速度
+
 	//座標行列
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 	//行列合成
@@ -67,12 +73,19 @@ void Player::PostUpdate()
 	//***********
 	//レイ判定用変数
 	KdCollider::RayInfo ray;
-	//レイ判定　発射位置
+	//レイ判定　発射位置　プレイヤーの位置から例を出す
 	ray.m_pos = m_pos;
+	//プレイヤーのちょっと上からの位置にする
+	ray.m_pos.y += 0.1f;
+	//段差の許容範囲
+	//段差を上がれるようにするための高さ
+	float enableStepHigh = 0.2f;
+	ray.m_pos.y += enableStepHigh;
+
 	//レイ　発射方向判定
 	ray.m_dir = { 0, -1, 0 };
 	//レイ　長さを設定
-	ray.m_range = 1;
+	ray.m_range = m_gravity + enableStepHigh;
 	//当たり判定をしたいタイプを設定
 	ray.m_type = KdCollider::TypeGround;
 
@@ -106,14 +119,73 @@ void Player::PostUpdate()
 	//一番近いとこの座標
 	if(hit == true)
 	{
-		m_pos = hitPos;
+		//当たっていたら当たった座標にプレイヤーの座標をセット
+		m_pos = hitPos + Math::Vector3(0.0f, -0.1f, 0.0f);
+		m_gravity = 0;//重力を無効化にする
+	}
+	//***********
+	//球判定　(スフィア)判定
+	//***********
+	//球判定用変数
+	KdCollider::SphereInfo sphere;
+	//球の中止座標　設定
+	//キャラクターの位置を中止にする
+	sphere.m_sphere.Center = m_pos;
+	sphere.m_sphere.Center.y += 0.5f;//ちょっと上にする
+	//球の半径　設定
+	//キャラクターの足元から半径0.3の球を出す
+	sphere.m_sphere.Radius = 0.3f;
+	//当たり判定をしたいタイプを設定
+	sphere.m_type = KdCollider::TypeGround;
+
+	//デバック　可視化
+	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
+
+	//球に当たったオブジェクト情報を格納するリスト
+	std::list<KdCollider::CollisionResult> retSphereList;
+	//全オブジェクトと当たり判定
+	for (auto& obj : SceneManager::Instance().GetObjList())
+	{
+		//球と当たり判定
+		obj->Intersects(sphere, &retSphereList);
+	}
+	//球にあたったリストから一番近いオブジェクトを探す
+	//レイ判定の時に宣言している
+	mextOverLap = 0;	//球の時はめりこんだ長さ
+	//レイ判定の時に宣言している
+	hit = false;
+	//当たった方向を格納する変数
+	Math::Vector3 hitDir;
+	for (auto& ret : retSphereList)
+	{
+		//球にめり込んだ長さが一番長いものを探す
+		if (mextOverLap < ret.m_overlapDistance)
+		{
+			//更新
+			mextOverLap = ret.m_overlapDistance;
+			hitDir = ret.m_hitDir;
+			hit = true;
+		}
+	}
+
+	if (hit == true)
+	{
+		//2.5Dを作るなら
+		//Z方向への押出無効
+		hitDir.z = 0;
+		//正規化　長さを1にする
+		hitDir.Normalize();
+
+		//当たっていたら押し戻し
+		m_pos += hitDir * mextOverLap;
+		//hitDir　当たった方向(方向ベクトルは長さ1)
+		//mextOverLap　めり込んだ長さ
 	}
 
 }
 
 void Player::DrawLit()
 {
-
 	//表示
 	// m_model　は　ポインタだから　*　がいる
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_polygon, m_mWorld);

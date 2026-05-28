@@ -19,4 +19,8 @@ private:
 	float m_anime = 0;
 	Math::Vector3 m_pos;
 
+	//ジャンプ
+	//重力
+	float m_gravity = 0;
+
 };

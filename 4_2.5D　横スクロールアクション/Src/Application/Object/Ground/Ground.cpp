@@ -12,15 +12,17 @@ void Ground::Init()
 	m_mWorld = scalMat;
 
 	//当てられる側の処理***********
-	//当たり判定をつけたいから実体化する
-	m_pCollider = std::make_unique<KdCollider>();
-	//モデルの形状で当たり判定　登録
-	m_pCollider->RegisterCollisionShape
-	(
-		"GroundCollision",	// 名前
-		m_model,			//登録したいモデルの形状
-		KdCollider::Type::TypeGround	//当たり判定の種類
-	);
+	{
+		//当たり判定をつけたいから実体化する
+		m_pCollider = std::make_unique<KdCollider>();
+		//モデルの形状で当たり判定　登録
+		m_pCollider->RegisterCollisionShape
+		(
+			"GroundCollision",	// 名前
+			m_model,			//登録したいモデルの形状
+			KdCollider::Type::TypeGround	//当たり判定の種類
+		);
+	}
 
 	//***********
 }
