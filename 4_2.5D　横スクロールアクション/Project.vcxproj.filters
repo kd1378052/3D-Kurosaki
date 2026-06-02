@@ -88,6 +88,12 @@
     <Filter Include="Src\Application\Object\Back">
       <UniqueIdentifier>{bbdae7b6-42bb-4c1c-99f4-e097fb60ed37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Cannon">
+      <UniqueIdentifier>{1ecb1372-b0b1-4029-ab96-e9d74d860da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Enemy">
+      <UniqueIdentifier>{ac45cd16-d793-4ac8-aa6d-0fc14a30cf3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -273,6 +279,12 @@
     <ClInclude Include="Src\Application\Object\Back\Back.h">
       <Filter>Src\Application\Object\Back</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Cannon\Cannon.h">
+      <Filter>Src\Application\Object\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Enemy\Enemy.h">
+      <Filter>Src\Application\Object\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -427,6 +439,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Back\Back.cpp">
       <Filter>Src\Application\Object\Back</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Cannon\Cannon.cpp">
+      <Filter>Src\Application\Object\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Enemy\Enemy.cpp">
+      <Filter>Src\Application\Object\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

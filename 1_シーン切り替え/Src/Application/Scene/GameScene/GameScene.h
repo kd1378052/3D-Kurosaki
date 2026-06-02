@@ -15,7 +15,6 @@ public:
 
 private:
 
-	Math::Color color;
 
 	static const int maxDigits = 10;
 

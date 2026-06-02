@@ -3,6 +3,8 @@
 #include "../../Object/Ground/Ground.h"
 #include "../../Object/Player/Player.h"
 #include"../../Object/Back/Back.h"
+#include"../../Object/Cannon/Cannon.h"
+#include"../../Object/Enemy/Enemy.h"
 
 void GameScene::Event()
 {
@@ -14,7 +16,6 @@ void GameScene::Event()
 			SceneManager::SceneType::Title
 		);
 	}
-
 
 	//カメラ処理
 	Math::Vector3 camPos = {0,1,-5};
@@ -49,5 +50,15 @@ void GameScene::Init()
 	//std::shared_ptr< Player> player;
 	m_player = std::make_shared< Player>();
 	m_objList.push_back(m_player);
+
+	//Cannonを追加　表示
+	std::shared_ptr< Cannon> cannon;
+	cannon = std::make_shared< Cannon>();
+	m_objList.push_back(cannon);
+
+	//Enemyを追加　表示
+	std::shared_ptr< Enemy> enemy;
+	enemy = std::make_shared< Enemy>();
+	m_objList.push_back(enemy);
 
 }

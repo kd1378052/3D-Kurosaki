@@ -23,7 +23,6 @@ void Ground::Init()
 			KdCollider::Type::TypeGround	//当たり判定の種類
 		);
 	}
-
 	//***********
 }
 
