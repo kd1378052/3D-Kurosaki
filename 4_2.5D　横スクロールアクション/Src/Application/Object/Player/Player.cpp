@@ -1,6 +1,7 @@
 ﻿#include "Player.h"
 
 #include"../../Scene/SceneManager.h"
+#include"../Effect/Effect.h"
 
 void Player::Init()
 {
@@ -20,6 +21,9 @@ void Player::Init()
 
 	m_pos = { -20,2,0 };
 	
+
+	
+
 }
 
 void Player::Update()
@@ -45,12 +49,25 @@ void Player::Update()
 	{
 		m_pos.x -= 0.05f;
 	}
+	//攻撃
+	if (GetAsyncKeyState('Z') & 0x8000)
+	{
+		//攻撃
+		//エフェクト追加
+		std::shared_ptr<Effect> effect;
+		effect = std::make_shared<Effect>();
+		effect->SetPos(m_pos);
+		SceneManager::Instance().AddObject(effect);
+		//       ↑m_objList.push_back(effect);
+
+	}
 	//ジャンプ処理
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 	{
 		//ジャンプ力
 		m_gravity = -0.1f;
 	}
+	
 	m_pos.y -= m_gravity;
 
 	m_gravity += 0.005f;//重力の加速度

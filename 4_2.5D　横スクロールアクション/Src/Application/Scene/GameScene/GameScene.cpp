@@ -8,6 +8,9 @@
 
 void GameScene::Event()
 {
+	KdDebugGUI::Instance().ClearLog();
+	KdDebugGUI::Instance().AddLog("%d", m_objList.size());
+
 	//タイトルに戻る
 	if (GetAsyncKeyState('T') & 0x8000)
 	{
@@ -57,8 +60,16 @@ void GameScene::Init()
 	m_objList.push_back(cannon);
 
 	//Enemyを追加　表示
+	//敵5体追加
 	std::shared_ptr< Enemy> enemy;
-	enemy = std::make_shared< Enemy>();
-	m_objList.push_back(enemy);
 
+	//オブジェクト思考
+	for (int i = 0; i < 5; ++i)
+	{
+		enemy = std::make_shared< Enemy>();
+		enemy->SetPos({ -20 +(float)i ,3 , 0 });
+		m_objList.push_back(enemy);
+	}
+
+	
 }

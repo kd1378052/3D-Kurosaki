@@ -7,18 +7,24 @@ public:
 	~Enemy() {}
 
 	void Init() override;
-	void Update()		override;
-	void PostUpdate()	override;
+	void Update() override;
+	void PostUpdate() override;
 	void DrawLit() override;
+	//            ↓コンスト参照
+	void SetPos(const Math::Vector3& _pos) override { m_pos = _pos; }
+	//　メンバー変数を参照したいから
 
 private:
-	//板ポリ　2Dのものは↓これで宣言
-	std::shared_ptr<KdSquarePolygon> m_enemy;
 
+	std::shared_ptr<KdSquarePolygon> m_enemy;
 	float m_anime = 0;
 	Math::Vector3 m_pos;
-
-	//ジャンプ
-	//重力
 	float m_gravity = 0;
+
+
+
+	int m_dir = 1;    //移動方向(1:右, -1:左)
+	float m_goal = 0;
+	float m_speed = 0.01f;
+
 };
