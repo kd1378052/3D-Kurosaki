@@ -21,9 +21,6 @@ void Player::Init()
 
 	m_pos = { -20,2,0 };
 	
-
-	
-
 }
 
 void Player::Update()
@@ -56,7 +53,7 @@ void Player::Update()
 		//エフェクト追加
 		std::shared_ptr<Effect> effect;
 		effect = std::make_shared<Effect>();
-		effect->SetPos(m_pos);
+		effect->SetPos(m_pos+Math::Vector3(0.5,0.5,0));
 		SceneManager::Instance().AddObject(effect);
 		//       ↑m_objList.push_back(effect);
 
@@ -68,6 +65,10 @@ void Player::Update()
 		m_gravity = -0.1f;
 	}
 	
+	////ベクトル計算で弾の一方方向を算出
+	////目的地（プレイヤー座標）ー現在地（エネミー座標）
+	
+
 	m_pos.y -= m_gravity;
 
 	m_gravity += 0.005f;//重力の加速度

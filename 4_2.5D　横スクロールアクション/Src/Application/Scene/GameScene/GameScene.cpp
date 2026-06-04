@@ -5,6 +5,7 @@
 #include"../../Object/Back/Back.h"
 #include"../../Object/Cannon/Cannon.h"
 #include"../../Object/Enemy/Enemy.h"
+#include"../../Object/Ghost/Ghost.h"
 
 void GameScene::Event()
 {
@@ -59,12 +60,20 @@ void GameScene::Init()
 	cannon = std::make_shared< Cannon>();
 	m_objList.push_back(cannon);
 
+	//ゴーストを追加　表示
+	std::shared_ptr< Ghost> ghost;
+	ghost = std::make_shared< Ghost>();
+	//↓　ここでプレイヤーの座標を投げてる
+	ghost->SetTarget(m_player);
+	m_objList.push_back(ghost);
+
+
 	//Enemyを追加　表示
 	//敵5体追加
 	std::shared_ptr< Enemy> enemy;
 
 	//オブジェクト思考
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 10; ++i)
 	{
 		enemy = std::make_shared< Enemy>();
 		enemy->SetPos({ -20 +(float)i ,3 , 0 });

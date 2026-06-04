@@ -182,3 +182,9 @@ void Enemy::DrawLit()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_enemy, m_mWorld);
 }
+
+void Enemy::OnHit()
+{
+	//↓　こうするとオブジェクトが消える
+	m_isExpired = true;
+}
