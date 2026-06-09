@@ -28,6 +28,28 @@ void Ground::Init()
 
 void Ground::DrawLit()
 {
+	static float d = 0;
+
+	if (GetAsyncKeyState('Q') & 0x8000)
+	{
+		d += 0.001;
+		if (d > 1)
+		{
+			d = 1;
+		}
+	}
+	if (GetAsyncKeyState('W') & 0x8000)
+	{
+		d -= 0.001;
+		if (d < 0)
+		{
+			d = 0;
+		}
+	}
+
+	//ディゾルブ
+	KdShaderManager::Instance().m_StandardShader.SetDissolve(d);
+
 	//表示
 	// m_model　は　ポインタだから　*　がいる
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model, m_mWorld);

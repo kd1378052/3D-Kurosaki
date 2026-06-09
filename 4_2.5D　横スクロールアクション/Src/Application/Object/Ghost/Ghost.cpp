@@ -42,6 +42,10 @@ void Ghost::Update()
 
 void Ghost::DrawLit()
 {
+	//ブレンディング方法を変える								↓加算
+	KdShaderManager::Instance().ChangeBlendState(KdBlendState::Add);
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_ghost, m_mWorld);
+	//表示し終わったら元に戻す
+	KdShaderManager::Instance().ChangeBlendState(KdBlendState::Alpha);
 
 }

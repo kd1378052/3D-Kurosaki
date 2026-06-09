@@ -32,6 +32,17 @@ void Enemy::Init()
 
 void Enemy::Update()
 {
+	//if（フラグ==true）
+	// ｛
+	// OutroUpdate();
+	// return；
+	// ｝
+	//ポイントライト　(Max100個まで!!!) 
+	KdShaderManager::Instance().WorkAmbientController().AddPointLight(
+		{ 3,3,3 },//色
+		5,//半径
+		m_pos + Math::Vector3(0, 0.5, 0)//場所
+	);
 	// 当たり判定を見える化
 	m_pDebugWire->AddDebugSphere(m_pos + Math::Vector3(0, 0.5, 0), 0.2f, kRedColor);
 
@@ -122,6 +133,7 @@ void Enemy::PostUpdate()
 		m_gravity = 0;	//重力を無効化
 	}
 
+	
 	// ==============
 	//	球(スフィア)判定
 	// ==============
@@ -185,6 +197,12 @@ void Enemy::DrawLit()
 
 void Enemy::OnHit()
 {
+	//フラグを立てる
 	//↓　こうするとオブジェクトが消える
 	m_isExpired = true;
+}
+
+void Enemy::OutroUpdate()
+{
+	//敵が倒れるときのアニメーション
 }

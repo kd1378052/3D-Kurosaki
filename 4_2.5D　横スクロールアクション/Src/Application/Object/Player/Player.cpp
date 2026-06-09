@@ -31,7 +31,7 @@ void Player::Update()
 	//アニメーション
 	m_polygon->SetUVRect(Run[(int)m_anime]);
 	
-	m_anime += 0.2;//速度
+	//m_anime += 0.2;//速度
 	if (m_anime >= 4)
 	{
 		m_anime = 0;
@@ -202,9 +202,17 @@ void Player::PostUpdate()
 
 }
 
+void Player::GenerateDepthMapFromLight()
+{
+	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_polygon, m_mWorld);
+
+}
+
 void Player::DrawLit()
 {
+	
 	//表示
 	// m_model　は　ポインタだから　*　がいる
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_polygon, m_mWorld);
+	
 }

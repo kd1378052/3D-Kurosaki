@@ -31,6 +31,20 @@ void GameScene::Event()
 
 void GameScene::Init()
 {
+	//平行光(ディレク所なるライト)　光をどこからあてるか設定できる
+	//																　↓光の方向	↓色
+	//KdShaderManager::Instance().WorkAmbientController().SetDirLight({ 0, -1, 0.1 },{1,1,1});
+	//3,1,0 ←オレンジ　夕焼け
+	
+	//アンビエントライト
+	//KdShaderManager::Instance().WorkAmbientController().SetAmbientLight({1,1,1,1});
+	
+	//fog(霧)														↓距離↓高さ
+	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, true);
+	//距離フォグの設定														　↓色　　↓密度
+	//KdShaderManager::Instance().WorkAmbientController().SetDistanceFog({ 0,0,0 }, 0.1);
+	//高さフォグの設定												↓色　↓上↓下↓距離↓
+	KdShaderManager::Instance().WorkAmbientController().SetheightFog({ 0,0,0 }, 2, -2, 0);
 	//カメラを実体化
 	m_camera = std::make_unique<KdCamera>();
 
@@ -44,6 +58,27 @@ void GameScene::Init()
 	//4オブジェクトリストに追加
 	m_objList.push_back(ground);
 	//AddObject(ground);	↑こっちを使うと処理不可軽減
+
+	for (int i = 0; i < 5; ++i)
+	{
+		ground = std::make_shared< Ground>();
+		//Init
+		//先++しているから+5をする
+		ground->SetPos(Math::Vector3(0,0,i*5 + 5));
+		m_objList.push_back(ground);
+
+	}
+	//手前
+	ground = std::make_shared< Ground>();
+	//Init
+	ground->SetPos(Math::Vector3(0, 0,-3));
+	m_objList.push_back(ground);
+
+	//上
+	ground = std::make_shared< Ground>();
+	//Init
+	ground->SetPos(Math::Vector3(0, 5,0));
+	m_objList.push_back(ground);
 
 	//背景を追加
 	std::shared_ptr< Back> back;

@@ -34,6 +34,13 @@ void Effect::Update()
 
 void Effect::PostUpdate()
 {
+	//アニメーションの当たり判定を最初の時だけする
+	if (m_anime >= 4)
+	{
+		//早期リターン
+		return;
+	}
+
 	//球判定★
 	//球判定用　変数
 	KdCollider::SphereInfo sphere;
@@ -64,4 +71,10 @@ void Effect::PostUpdate()
 void Effect::DrawLit()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_effect, m_mWorld);
+}
+
+void Effect::DrawBright()
+{
+	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_effect, m_mWorld);
+
 }

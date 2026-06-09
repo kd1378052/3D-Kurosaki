@@ -11,6 +11,7 @@ public:
 	void PostUpdate() override;
 	void DrawLit() override;
 	void OnHit() override;
+	void OutroUpdate();
 
 	//            ↓コンスト参照
 	void SetPos(const Math::Vector3& _pos) override { m_pos = _pos; }
