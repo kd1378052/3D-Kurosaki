@@ -27,6 +27,13 @@ void GameScene::Event()
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(camPos+ m_player->GetPos());
 	m_camera->SetCameraMatrix(transMat);
 
+	//被写界深度      ↓ピンと合わせる処理
+	//m_camera->SetFocus(5, 3,		8);
+	//　　　　　　　　　　↑手前　↑奥
+
+	//画面全体をちょっとぼかして光らせる
+	KdShaderManager::Instance().m_postProcessShader.SetBrightThreshold(0.7);
+
 }
 
 void GameScene::Init()
