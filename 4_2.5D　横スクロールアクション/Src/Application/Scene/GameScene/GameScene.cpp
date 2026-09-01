@@ -28,11 +28,11 @@ void GameScene::Event()
 	m_camera->SetCameraMatrix(transMat);
 
 	//被写界深度      ↓ピンと合わせる処理
-	//m_camera->SetFocus(5, 3,		8);
+	m_camera->SetFocus(5, 3,		8);
 	//　　　　　　　　　　↑手前　↑奥
 
 	//画面全体をちょっとぼかして光らせる
-	KdShaderManager::Instance().m_postProcessShader.SetBrightThreshold(0.7);
+	//KdShaderManager::Instance().m_postProcessShader.SetBrightThreshold(0.7);
 
 }
 
