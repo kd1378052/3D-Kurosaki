@@ -1,0 +1,19 @@
+﻿#pragma once
+
+class Ground : public KdGameObject
+{
+public:
+	Ground() {}
+	~Ground()override {}
+
+	void Init()override;
+	void DrawLit()override;
+
+private:
+	//モデル
+	std::shared_ptr<KdModelData> m_model;
+
+	//黒崎授業追加④
+	//水面表現用のテクスチャ
+	std::shared_ptr<KdTexture> m_normalTex;
+};
